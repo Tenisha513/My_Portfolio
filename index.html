@@ -6,27 +6,42 @@
   <title>Tenisha Akhila Balla — AI & Data Science</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
   <style>
-    :root{--yellow:#FFE135;--pink:#FF3CAC;--cyan:#00F5FF;--dark:#0A0A0A;--mid:#1A1A2E;--card:#16213E;--white:#F0F0F0;}
+    :root{
+      --yellow:#FFE135;
+      --pink:#FF3CAC;
+      --cyan:#00F5FF;
+      --dark:#03060F;
+      --mid:#060D1A;
+      --white:#F0F0F0;
+      --glass:rgba(255,255,255,0.04);
+      --glass-border:rgba(255,255,255,0.10);
+      --glass-hover:rgba(255,255,255,0.08);
+    }
     *{margin:0;padding:0;box-sizing:border-box;}
     html,body{overflow-x:hidden;}
     body{background:var(--dark);color:var(--white);font-family:'Syne',sans-serif;cursor:none;}
-    .cursor{width:16px;height:16px;background:var(--yellow);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
 
-    /* ARCH BG - purely decorative SVG inside each hero, does not affect scroll */
+    .progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--cyan),var(--pink),var(--yellow));z-index:99999;transition:width 0.1s;}
+
+    .cursor{width:14px;height:14px;background:var(--yellow);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
+
+    #ai-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+
+    section,footer,.ticker{position:relative;z-index:1;}
+
+    .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:6rem 2rem 4rem 6vw;position:relative;background:transparent;}
     .arch-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
-
-    /* All content above arch */
     .hero>*:not(.arch-canvas){position:relative;z-index:1;}
 
-    /* HERO */
-    .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:6rem 2rem 4rem 6vw;position:relative;background:var(--dark);}
     .badge{background:var(--yellow);color:var(--dark);font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:6px 14px;border-radius:2px;margin-bottom:1.5rem;display:inline-block;animation:badgepop 0.6s cubic-bezier(0.175,0.885,0.32,1.275) both;}
     @keyframes badgepop{from{transform:scale(0) rotate(-10deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+
     .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,11vw,140px);line-height:0.92;letter-spacing:0.02em;margin-bottom:1.5rem;animation:slideup 0.8s 0.2s cubic-bezier(0.16,1,0.3,1) both;}
     .hero h1 .pink{color:var(--pink);}
     .hero h1 .cyan{color:var(--cyan);}
     @keyframes slideup{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
-    .hero-sub{font-family:'Space Mono',monospace;font-size:clamp(12px,1.8vw,15px);color:rgba(240,240,240,0.6);max-width:560px;line-height:1.9;margin-bottom:2.5rem;animation:slideup 0.8s 0.4s cubic-bezier(0.16,1,0.3,1) both;}
+
+    .hero-sub{font-family:'Space Mono',monospace;font-size:clamp(12px,1.8vw,15px);color:rgba(240,240,240,0.7);max-width:560px;line-height:1.9;margin-bottom:2.5rem;animation:slideup 0.8s 0.4s cubic-bezier(0.16,1,0.3,1) both;}
     .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;animation:slideup 0.8s 0.6s cubic-bezier(0.16,1,0.3,1) both;}
 
     .btn{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:14px 28px;border:none;border-radius:3px;cursor:none;text-decoration:none;transition:transform 0.15s ease,box-shadow 0.15s ease;display:inline-block;}
@@ -38,86 +53,146 @@
     .btn-pink{background:transparent;color:var(--white);border:2px solid var(--pink);box-shadow:4px 4px 0 var(--pink);}
     .btn-pink:hover{box-shadow:8px 8px 0 var(--pink);}
 
-    /* TICKER */
     .ticker{background:var(--yellow);padding:12px 0;overflow:hidden;white-space:nowrap;}
     .ticker-inner{display:inline-block;animation:ticker 28s linear infinite;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--dark);letter-spacing:0.1em;}
     @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    /* SECTIONS */
     section{padding:6rem 6vw;}
-    .sec-dark{background:var(--dark);}
-    .sec-mid{background:var(--mid);}
+    .sec-dark{background:rgba(3,6,15,0.85);backdrop-filter:blur(2px);}
+    .sec-mid{background:rgba(6,13,26,0.88);backdrop-filter:blur(2px);}
     .section-label{font-family:'Space Mono',monospace;font-size:11px;color:var(--pink);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;}
     .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,90px);letter-spacing:0.03em;line-height:1;margin-bottom:2.5rem;}
 
-    /* ABOUT */
+    .glass-card{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.10);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border-radius:12px;
+      transition:transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+    .glass-card:hover{
+      background:rgba(255,255,255,0.08);
+      transform:translateY(-6px);
+      box-shadow:0 0 30px rgba(0,245,255,0.12), 0 0 60px rgba(255,60,172,0.08);
+    }
+    .glass-card-cyan{border-color:rgba(0,245,255,0.25);}
+    .glass-card-cyan:hover{box-shadow:0 0 30px rgba(0,245,255,0.2), 0 0 60px rgba(0,245,255,0.1);}
+    .glass-card-pink{border-color:rgba(255,60,172,0.25);}
+    .glass-card-pink:hover{box-shadow:0 0 30px rgba(255,60,172,0.2), 0 0 60px rgba(255,60,172,0.1);}
+    .glass-card-yellow{border-color:rgba(255,225,53,0.25);}
+    .glass-card-yellow:hover{box-shadow:0 0 30px rgba(255,225,53,0.15), 0 0 60px rgba(255,225,53,0.08);}
+
     .about-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:4rem;align-items:start;}
     @media(max-width:750px){.about-grid{grid-template-columns:1fr;}}
-    .about-text p{font-size:15px;line-height:1.9;color:rgba(240,240,240,0.75);margin-bottom:1.2rem;font-family:'Space Mono',monospace;}
+    .about-text p{font-size:15px;line-height:1.9;color:rgba(240,240,240,0.85);margin-bottom:1.2rem;font-family:'Space Mono',monospace;}
     .about-text p strong{color:var(--yellow);}
-    .stat-box{background:var(--card);border:1px solid rgba(255,255,255,0.08);border-left:4px solid var(--cyan);padding:1.2rem 1.5rem;border-radius:4px;margin-bottom:1rem;}
-    .stat-box .num{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--cyan);line-height:1;}
-    .stat-box .label{font-family:'Space Mono',monospace;font-size:11px;color:rgba(240,240,240,0.5);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;}
 
-    /* RESEARCH */
+    .stat-box{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.10);
+      border-left:4px solid var(--cyan);
+      backdrop-filter:blur(12px);
+      padding:1.2rem 1.5rem;
+      border-radius:8px;
+      margin-bottom:1rem;
+      transition:background 0.3s, box-shadow 0.3s;
+    }
+    .stat-box:hover{background:rgba(0,245,255,0.06);box-shadow:0 0 20px rgba(0,245,255,0.1);}
+    .stat-box .num{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--cyan);line-height:1;}
+    .stat-box .label{font-family:'Space Mono',monospace;font-size:11px;color:rgba(240,240,240,0.65);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;}
+
+    /* RESEARCH CARDS — glass */
     .research-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:3rem;}
-    .research-card{border:1px solid rgba(255,255,255,0.08);padding:2rem;border-radius:6px;transition:transform 0.2s ease;}
-    .research-card:hover{transform:translateY(-5px);}
-    .rc-blue{background:rgba(0,245,255,0.03);border-color:rgba(0,245,255,0.15);}
-    .rc-pink{background:rgba(255,60,172,0.03);border-color:rgba(255,60,172,0.15);}
+    .research-card{padding:2rem;border-radius:12px;}
     .research-card .rc-icon{font-size:32px;margin-bottom:1rem;}
     .research-card h3{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.04em;margin-bottom:0.6rem;}
-    .research-card p{font-family:'Space Mono',monospace;font-size:12px;color:rgba(240,240,240,0.55);line-height:1.9;}
-    .rc-tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:2px;display:inline-block;margin-bottom:1rem;}
+    .research-card p{font-family:'Space Mono',monospace;font-size:12px;color:rgba(240,240,240,0.82);line-height:1.9;}
+    .rc-tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:1rem;}
+    .rc-tag-cyan{background:rgba(0,245,255,0.12);color:var(--cyan);border:1px solid rgba(0,245,255,0.3);}
+    .rc-tag-pink{background:rgba(255,60,172,0.12);color:var(--pink);border:1px solid rgba(255,60,172,0.3);}
 
-    /* CYBER */
-    .cyber{background:var(--mid);position:relative;overflow:hidden;}
     .cyber-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
     @media(max-width:700px){.cyber-inner{grid-template-columns:1fr;}}
-    .cyber-text p{font-family:'Space Mono',monospace;font-size:14px;color:rgba(240,240,240,0.7);line-height:2;margin-bottom:1.2rem;}
+    .cyber-text p{font-family:'Space Mono',monospace;font-size:14px;color:rgba(240,240,240,0.82);line-height:2;margin-bottom:1.2rem;}
     .cyber-text p strong{color:var(--pink);}
-    .cyber-highlight{background:var(--dark);border:1px solid rgba(255,60,172,0.3);border-left:5px solid var(--pink);padding:1.5rem 1.8rem;border-radius:4px;margin-bottom:1.5rem;}
-    .cyber-highlight p{font-family:'Space Mono',monospace;font-size:13px;color:rgba(240,240,240,0.8);line-height:1.9;margin:0;}
+
+    .cyber-highlight{
+      background:rgba(255,60,172,0.06);
+      border:1px solid rgba(255,60,172,0.3);
+      border-left:5px solid var(--pink);
+      backdrop-filter:blur(12px);
+      padding:1.5rem 1.8rem;
+      border-radius:8px;
+      margin-bottom:1.5rem;
+    }
+    .cyber-highlight p{font-family:'Space Mono',monospace;font-size:13px;color:rgba(240,240,240,0.9);line-height:1.9;margin:0;}
     .cyber-highlight p em{color:var(--yellow);font-style:italic;}
-    .cbadge{background:var(--card);border:1px solid rgba(255,255,255,0.08);padding:1.4rem 1.6rem;border-radius:6px;display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;transition:transform 0.2s ease;}
-    .cbadge:hover{transform:translateX(6px);}
+
+    .cbadge{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.10);
+      backdrop-filter:blur(12px);
+      padding:1.4rem 1.6rem;
+      border-radius:10px;
+      display:flex;
+      align-items:flex-start;
+      gap:1rem;
+      margin-bottom:1rem;
+      transition:transform 0.2s ease, box-shadow 0.3s, background 0.3s;
+    }
+    .cbadge:hover{transform:translateX(6px);background:rgba(255,255,255,0.07);box-shadow:0 0 20px rgba(0,245,255,0.1);}
     .cbadge-icon{font-size:24px;flex-shrink:0;}
     .cbadge-text h4{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.05em;margin-bottom:3px;}
-    .cbadge-text p{font-family:'Space Mono',monospace;font-size:11px;color:rgba(240,240,240,0.5);line-height:1.7;margin:0;}
-    .cbadge-text span{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:2px 8px;border-radius:2px;display:inline-block;margin-bottom:5px;}
-    .span-pink{background:rgba(255,60,172,0.2);color:var(--pink);}
-    .span-cyan{background:rgba(0,245,255,0.2);color:var(--cyan);}
-
-    /* SKILLS */
+    .cbadge-text p{font-family:'Space Mono',monospace;font-size:11px;color:rgba(240,240,240,0.75);line-height:1.7;margin:0;}
+    .cbadge-text span{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:2px 10px;border-radius:20px;display:inline-block;margin-bottom:5px;}
+    .span-pink{background:rgba(255,60,172,0.15);color:var(--pink);border:1px solid rgba(255,60,172,0.3);}
+    .span-cyan{background:rgba(0,245,255,0.15);color:var(--cyan);border:1px solid rgba(0,245,255,0.3);}
+    
     .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;}
-    .skill-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);padding:1.8rem 1.5rem;border-radius:6px;transition:transform 0.2s ease;position:relative;overflow:hidden;}
-    .skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
-    .skill-card:nth-child(odd)::before{background:var(--pink);}
-    .skill-card:nth-child(even)::before{background:var(--cyan);}
-    .skill-card:hover{transform:translateY(-6px);}
+    .skill-card{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.10);
+      backdrop-filter:blur(16px);
+      padding:1.8rem 1.5rem;
+      border-radius:12px;
+      transition:transform 0.3s ease, box-shadow 0.3s, background 0.3s;
+      position:relative;
+      overflow:hidden;
+    }
+    .skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;}
+    .skill-card:nth-child(odd)::before{background:linear-gradient(90deg,var(--pink),transparent);}
+    .skill-card:nth-child(even)::before{background:linear-gradient(90deg,var(--cyan),transparent);}
+    .skill-card:hover{transform:translateY(-6px);background:rgba(255,255,255,0.07);box-shadow:0 0 30px rgba(0,245,255,0.12);}
     .skill-icon{font-size:28px;margin-bottom:0.8rem;}
     .skill-card h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.05em;margin-bottom:0.4rem;}
-    .skill-card p{font-family:'Space Mono',monospace;font-size:11px;color:rgba(240,240,240,0.5);line-height:1.7;}
+    .skill-card p{font-family:'Space Mono',monospace;font-size:11px;color:rgba(240,240,240,0.78);line-height:1.7;}
     .skill-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:0.6rem;}
-    .stag{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;background:rgba(255,255,255,0.07);color:rgba(240,240,240,0.6);}
+    .stag{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(240,240,240,0.75);}
 
-    /* PROJECTS */
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
-    .project-card{background:var(--dark);border:1px solid rgba(255,255,255,0.06);padding:2rem;border-radius:6px;transition:transform 0.2s ease;display:flex;flex-direction:column;gap:0.75rem;}
-    .project-card:hover{transform:translateY(-5px);}
-    .project-tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border-radius:2px;display:inline-block;}
-    .tag-pink{background:rgba(255,60,172,0.2);color:var(--pink);}
-    .tag-yellow{background:rgba(255,225,53,0.2);color:var(--yellow);}
-    .tag-cyan{background:rgba(0,245,255,0.2);color:var(--cyan);}
+    .project-card{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.10);
+      backdrop-filter:blur(16px);
+      padding:2rem;
+      border-radius:12px;
+      transition:transform 0.3s ease, box-shadow 0.3s, background 0.3s;
+      display:flex;flex-direction:column;gap:0.75rem;
+    }
+    .project-card:hover{transform:translateY(-8px) scale(1.01);background:rgba(255,255,255,0.07);box-shadow:0 0 40px rgba(0,245,255,0.15),0 0 80px rgba(255,60,172,0.08);}
+    .project-tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:20px;display:inline-block;}
+    .tag-pink{background:rgba(255,60,172,0.15);color:var(--pink);border:1px solid rgba(255,60,172,0.35);}
+    .tag-yellow{background:rgba(255,225,53,0.15);color:var(--yellow);border:1px solid rgba(255,225,53,0.35);}
+    .tag-cyan{background:rgba(0,245,255,0.15);color:var(--cyan);border:1px solid rgba(0,245,255,0.35);}
+    .date{font-family:'Space Mono',monospace;font-size:10px;color:rgba(240,240,240,0.45);}
     .project-card h3{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.03em;line-height:1.1;}
-    .date{font-family:'Space Mono',monospace;font-size:10px;color:rgba(240,240,240,0.35);}
-    .project-card p{font-family:'Space Mono',monospace;font-size:12px;color:rgba(240,240,240,0.55);line-height:1.8;flex:1;}
+    .project-card p{font-family:'Space Mono',monospace;font-size:12px;color:rgba(240,240,240,0.82);line-height:1.8;flex:1;}
     .project-result{font-family:'Space Mono',monospace;font-size:11px;color:var(--cyan);border-left:2px solid var(--cyan);padding-left:10px;line-height:1.6;}
     .gh-link{font-family:'Space Mono',monospace;font-size:11px;text-decoration:none;margin-top:0.3rem;display:inline-block;}
     .gh-real{color:var(--pink);}
-    .gh-soon{color:rgba(240,240,240,0.25);border:1px dashed rgba(255,255,255,0.12);padding:4px 10px;border-radius:2px;}
+    .placeholder-link{font-family:'Space Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);text-decoration:none;display:inline-flex;align-items:center;gap:6px;border:1px dashed rgba(255,255,255,0.15);padding:4px 10px;border-radius:20px;margin-top:6px;}
 
-    /* TIMELINE */
     .timeline{position:relative;padding-left:2rem;}
     .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--pink),var(--cyan));}
     .tl-item{position:relative;margin-bottom:2.5rem;}
@@ -125,61 +200,55 @@
     .tl-date{font-family:'Space Mono',monospace;font-size:10px;color:var(--yellow);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;}
     .tl-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.05em;margin-bottom:4px;}
     .tl-org{font-family:'Space Mono',monospace;font-size:11px;color:var(--pink);margin-bottom:8px;}
-    .tl-desc{font-family:'Space Mono',monospace;font-size:12px;color:rgba(240,240,240,0.55);line-height:1.8;}
+    .tl-desc{font-family:'Space Mono',monospace;font-size:12px;color:rgba(240,240,240,0.82);line-height:1.8;}
 
-    /* ACADEMIC */
-    .ac-card{background:var(--card);border:1px solid rgba(255,255,255,0.07);padding:1.5rem;border-radius:6px;margin-bottom:1rem;}
-    .ac-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;margin-bottom:3px;}
-    .ac-sub{font-family:'Space Mono',monospace;font-size:11px;margin-bottom:6px;}
-    .ac-desc{font-family:'Space Mono',monospace;font-size:12px;color:rgba(240,240,240,0.55);line-height:1.8;margin-bottom:8px;}
-
-    /* EXTRAS */
     .extras-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
     @media(max-width:650px){.extras-grid{grid-template-columns:1fr;}}
     .extras-col h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.05em;margin-bottom:1.2rem;color:var(--yellow);}
-    .cert-item,.club-item{font-family:'Space Mono',monospace;font-size:12px;color:rgba(240,240,240,0.65);padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);line-height:1.6;display:flex;gap:10px;align-items:flex-start;}
+    .cert-item,.club-item{font-family:'Space Mono',monospace;font-size:12px;color:rgba(240,240,240,0.80);padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.08);line-height:1.6;display:flex;gap:10px;align-items:flex-start;}
     .cert-item::before{content:'★';color:var(--yellow);font-size:10px;flex-shrink:0;margin-top:2px;}
     .club-item::before{content:'◆';color:var(--pink);font-size:10px;flex-shrink:0;margin-top:2px;}
 
-    /* CONTACT */
     .contact{text-align:center;}
     .contact .section-title{color:var(--yellow);}
-    .contact-sub{font-family:'Space Mono',monospace;font-size:14px;color:rgba(240,240,240,0.5);margin-bottom:3rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.9;}
+    .contact-sub{font-family:'Space Mono',monospace;font-size:14px;color:rgba(240,240,240,0.65);margin-bottom:3rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.9;}
     .contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;}
 
-    footer{background:var(--mid);padding:2rem 6vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(255,255,255,0.06);}
-    footer p{font-family:'Space Mono',monospace;font-size:12px;color:rgba(240,240,240,0.35);}
+    footer{background:rgba(6,13,26,0.95);backdrop-filter:blur(10px);padding:2rem 6vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(255,255,255,0.08);}
+    footer p{font-family:'Space Mono',monospace;font-size:12px;color:rgba(240,240,240,0.4);}
     .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.1em;color:var(--yellow);}
+
+    .ethical-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,60,172,0.08);border:1px solid rgba(255,60,172,0.35);backdrop-filter:blur(12px);padding:12px 20px;border-radius:8px;margin-top:1rem;}
 
     .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
     .reveal.visible{opacity:1;transform:translateY(0);}
-
-    .placeholder-link{font-family:'Space Mono',monospace;font-size:11px;color:rgba(240,240,240,0.25);text-decoration:none;display:inline-flex;align-items:center;gap:6px;border:1px dashed rgba(255,255,255,0.12);padding:4px 10px;border-radius:2px;margin-top:6px;}
   </style>
 </head>
 <body>
+
+<canvas id="ai-bg"></canvas>
+
+<div class="progress-bar" id="progress"></div>
+
 <div class="cursor" id="cursor"></div>
 
-<!-- HERO with inline arch background -->
+<!-- HERO -->
 <section class="hero">
-  <!-- Architectural SVG stays INSIDE hero only -->
   <div class="arch-canvas">
     <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
       <defs>
         <pattern id="sg" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M40 0L0 0 0 40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+          <path d="M40 0L0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
         </pattern>
         <pattern id="lg" width="200" height="200" patternUnits="userSpaceOnUse">
           <rect width="200" height="200" fill="url(#sg)"/>
-          <path d="M200 0L0 0 0 200" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+          <path d="M200 0L0 0 0 200" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#lg)"/>
-      <!-- diagonal lines -->
-      <line x1="0" y1="0" x2="400" y2="900" stroke="rgba(0,245,255,0.05)" stroke-width="1"/>
-      <line x1="1440" y1="0" x2="1040" y2="900" stroke="rgba(255,60,172,0.05)" stroke-width="1"/>
-      <!-- compass rose top right -->
-      <g transform="translate(1300,160)" stroke="rgba(255,225,53,0.08)" fill="none">
+      <line x1="0" y1="0" x2="400" y2="900" stroke="rgba(0,245,255,0.06)" stroke-width="1"/>
+      <line x1="1440" y1="0" x2="1040" y2="900" stroke="rgba(255,60,172,0.06)" stroke-width="1"/>
+      <g transform="translate(1300,160)" stroke="rgba(255,225,53,0.10)" fill="none">
         <circle cx="0" cy="0" r="80" stroke-width="0.5"/>
         <circle cx="0" cy="0" r="50" stroke-width="0.5"/>
         <circle cx="0" cy="0" r="20" stroke-width="0.5"/>
@@ -188,49 +257,25 @@
         <line x1="-57" y1="-57" x2="57" y2="57" stroke-width="0.3"/>
         <line x1="57" y1="-57" x2="-57" y2="57" stroke-width="0.3"/>
       </g>
-      <!-- truss bottom left -->
-      <g stroke="rgba(0,245,255,0.08)" stroke-width="0.8" fill="none">
+      <g stroke="rgba(0,245,255,0.10)" stroke-width="0.8" fill="none">
         <polygon points="40,860 160,760 280,860"/>
         <polygon points="160,760 280,860 400,760"/>
         <line x1="40" y1="860" x2="400" y2="860" stroke-width="0.5"/>
         <line x1="160" y1="760" x2="160" y2="860" stroke-dasharray="4 6"/>
         <line x1="280" y1="760" x2="280" y2="860" stroke-dasharray="4 6"/>
       </g>
-      <!-- truss top right -->
-      <g stroke="rgba(255,60,172,0.08)" stroke-width="0.8" fill="none">
+      <g stroke="rgba(255,60,172,0.10)" stroke-width="0.8" fill="none">
         <polygon points="1060,40 1180,140 1300,40"/>
         <polygon points="1180,140 1300,40 1420,140"/>
         <line x1="1060" y1="40" x2="1420" y2="40" stroke-width="0.5"/>
       </g>
-      <!-- corner brackets -->
-      <g stroke="rgba(0,245,255,0.15)" stroke-width="1" fill="none">
+      <g stroke="rgba(0,245,255,0.2)" stroke-width="1" fill="none">
         <path d="M60 30L20 30L20 80"/>
       </g>
-      <g stroke="rgba(255,60,172,0.15)" stroke-width="1" fill="none">
+      <g stroke="rgba(255,60,172,0.2)" stroke-width="1" fill="none">
         <path d="M1380 30L1420 30L1420 80"/>
       </g>
-      <!-- dimension lines -->
-      <g stroke="rgba(255,255,255,0.06)" stroke-width="0.5" fill="none">
-        <line x1="8" y1="100" x2="8" y2="800"/>
-        <line x1="4" y1="100" x2="12" y2="100"/>
-        <line x1="4" y1="800" x2="12" y2="800"/>
-      </g>
-      <!-- large arc -->
-      <path d="M-100 900 Q720 -200 1540 900" stroke="rgba(255,255,255,0.03)" stroke-width="1" fill="none"/>
-      <!-- nodes -->
-      <g fill="rgba(0,245,255,0.2)">
-        <circle cx="200" cy="200" r="2"/><circle cx="400" cy="200" r="1.5"/>
-        <circle cx="800" cy="400" r="2"/><circle cx="1200" cy="400" r="2"/>
-      </g>
-      <g fill="rgba(255,225,53,0.15)">
-        <circle cx="300" cy="400" r="2"/><circle cx="700" cy="200" r="2"/>
-        <circle cx="1100" cy="600" r="1.5"/>
-      </g>
-      <!-- coord labels -->
-      <g font-family="monospace" font-size="8" fill="rgba(255,255,255,0.07)">
-        <text x="22" y="205">Y-200</text><text x="22" y="455">Y-450</text>
-        <text x="195" y="895">X-200</text><text x="995" y="895">X-1000</text>
-      </g>
+      <path d="M-100 900 Q720 -200 1540 900" stroke="rgba(255,255,255,0.04)" stroke-width="1" fill="none"/>
     </svg>
   </div>
 
@@ -249,14 +294,12 @@
   </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker">
   <div class="ticker-inner">
     &nbsp;&nbsp;&nbsp;PYTHON &nbsp;★&nbsp; MATLAB &nbsp;★&nbsp; MULTI-AGENT SYSTEMS &nbsp;★&nbsp; SWARM INTELLIGENCE &nbsp;★&nbsp; UAV &nbsp;★&nbsp; WEB EXPLOITATION &nbsp;★&nbsp; REACT &nbsp;★&nbsp; TYPESCRIPT &nbsp;★&nbsp; POSTGRESQL &nbsp;★&nbsp; QUANTUM COMPUTING &nbsp;★&nbsp; BI0S RED TEAM &nbsp;★&nbsp; ACM-SIGCYBER &nbsp;★&nbsp; CGPA 9.02 &nbsp;★&nbsp; TOP 20 HACKATHON FINALIST &nbsp;★&nbsp; PYTHON &nbsp;★&nbsp; MATLAB &nbsp;★&nbsp; MULTI-AGENT SYSTEMS &nbsp;★&nbsp; SWARM INTELLIGENCE &nbsp;★&nbsp; UAV &nbsp;★&nbsp; WEB EXPLOITATION &nbsp;★&nbsp; REACT &nbsp;★&nbsp; TYPESCRIPT &nbsp;★&nbsp; POSTGRESQL &nbsp;★&nbsp; QUANTUM COMPUTING &nbsp;★&nbsp; BI0S RED TEAM &nbsp;★&nbsp; ACM-SIGCYBER &nbsp;★&nbsp; CGPA 9.02 &nbsp;★&nbsp; TOP 20 HACKATHON FINALIST &nbsp;★&nbsp;
   </div>
 </div>
 
-<!-- ABOUT -->
 <section class="sec-mid" id="about">
   <div class="reveal">
     <p class="section-label">// about me</p>
@@ -266,84 +309,70 @@
     <div class="about-text">
       <p>Hey! I'm <strong>Tenisha</strong> — an AI & Data Science student who genuinely enjoys making machines smarter, systems faster, and bugs disappear (most of the time).</p>
       <p>Currently studying at <strong>Amrita Vishwa Vidyapeetam, Amritapuri</strong> with a CGPA that my parents brag about and I pretend is no big deal. It's a 9.02. It's a big deal.</p>
-      <p>Deeply interested in <strong>sustainable development</strong> — from energy-constrained drone swarms to smart grids and climate resilience systems. If the algorithm can save power, optimise a grid, or make critical infrastructure more efficient <em style="color:var(--cyan);">and</em> more secure, I'm already building it. Because a smart grid that isn't secure isn't smart — it's just a bigger attack surface.</p>
+      <p>Deeply interested in <strong>sustainable development</strong> — from energy-constrained drone swarms to smart grids and climate resilience. If the algorithm can save power, optimise a grid, or make critical infrastructure more efficient <em style="color:var(--cyan);">and</em> more secure, I'm already building it. Because a smart grid that isn't secure isn't smart — it's just a bigger attack surface.</p>
       <p>I build things that work, break things that shouldn't, and write code that occasionally surprises even me. Based in <strong>Visakhapatnam, Andhra Pradesh</strong> — shipping from the coast.</p>
     </div>
     <div>
-      <div class="stat-box">
-        <div class="num">9.02</div>
-        <div class="label">CGPA — Not a flex. Okay, tiny flex.</div>
-      </div>
-      <div class="stat-box" style="border-left-color:var(--yellow);">
-        <div class="num" style="color:var(--yellow);">3+</div>
-        <div class="label">Real projects. Shipped. Working.</div>
-      </div>
-      <div class="stat-box" style="border-left-color:var(--pink);">
-        <div class="num" style="color:var(--pink);">CTF</div>
-        <div class="label">Challenge creator — both sides of the flag</div>
-      </div>
-      <div class="stat-box" style="border-left-color:rgba(255,255,255,0.15);">
-        <div class="num" style="color:rgba(240,240,240,0.5);">∞</div>
-        <div class="label">Tabs open during model training</div>
-      </div>
+      <div class="stat-box"><div class="num">9.02</div><div class="label">CGPA — Not a flex. Okay, tiny flex.</div></div>
+      <div class="stat-box" style="border-left-color:var(--yellow);"><div class="num" style="color:var(--yellow);">3+</div><div class="label">Real projects. Shipped. Working.</div></div>
+      <div class="stat-box" style="border-left-color:var(--pink);"><div class="num" style="color:var(--pink);">CTF</div><div class="label">Challenge creator — both sides of the flag</div></div>
+      <div class="stat-box" style="border-left-color:rgba(255,255,255,0.2);"><div class="num" style="color:rgba(240,240,240,0.6);">∞</div><div class="label">Tabs open during model training</div></div>
     </div>
   </div>
 </section>
 
-<!-- RESEARCH -->
 <section class="sec-dark" id="research">
   <div class="reveal">
     <p class="section-label">// what keeps me up at night (academically)</p>
     <h2 class="section-title">Research<br>Interests</h2>
   </div>
   <div class="research-grid reveal">
-    <div class="research-card rc-blue">
+    <div class="research-card glass-card glass-card-cyan">
       <div class="rc-icon">🚁</div>
-      <span class="rc-tag" style="background:rgba(0,245,255,0.15);color:var(--cyan);">Multi-Agent Systems</span>
+      <span class="rc-tag rc-tag-cyan">Multi-Agent Systems</span>
       <h3>Swarm Intelligence</h3>
       <p>Specialising in Optimization under Uncertainty and MARL. Making swarms of drones cooperate without crashing into each other. The energy efficiency part was harder. The crashing part is still... a work in progress.</p>
     </div>
-    <div class="research-card rc-pink">
+    <div class="research-card glass-card glass-card-pink">
       <div class="rc-icon">🌊</div>
-      <span class="rc-tag" style="background:rgba(255,60,172,0.15);color:var(--pink);">AI for Good</span>
+      <span class="rc-tag rc-tag-pink">AI for Good</span>
       <h3>Disaster Risk Reduction</h3>
       <p>AI-driven systems for flood rescue and climate resilience. Because if you're going to train a model, it might as well help save lives. Big problems deserve better algorithms.</p>
     </div>
-    <div class="research-card rc-blue">
+    <div class="research-card glass-card glass-card-cyan">
       <div class="rc-icon">🌱</div>
-      <span class="rc-tag" style="background:rgba(0,245,255,0.15);color:var(--cyan);">Adaptive MARL · Ongoing</span>
+      <span class="rc-tag rc-tag-cyan">Adaptive MARL · Ongoing</span>
       <h3>UAV Swarm Precision Agriculture</h3>
-      <p>Working on: <em style="color:var(--cyan);">Adaptive Meta-Guided Multi-Agent Reinforcement Learning for Energy-Constrained Swarm UAV Precision Agriculture.</em> Teaching drone swarms to be energy-smart AND effective. The drones are cooperating. Mostly.</p>
+      <p>Working on: <em style="color:var(--cyan);">Adaptive Meta-Guided MARL for Energy-Constrained Swarm UAV Precision Agriculture.</em> Teaching drone swarms to be energy-smart AND effective. The drones are cooperating. Mostly.</p>
     </div>
-    <div class="research-card rc-pink">
+    <div class="research-card glass-card glass-card-pink">
       <div class="rc-icon">📊</div>
-      <span class="rc-tag" style="background:rgba(255,60,172,0.15);color:var(--pink);">Surrogate Models</span>
+      <span class="rc-tag rc-tag-pink">Surrogate Models</span>
       <h3>Predictive Analytics</h3>
       <p>Building data-driven surrogate models for environmental and logistical systems. Swarm optimisation + predictive analytics = solving problems that spreadsheets refused to touch.</p>
     </div>
-    <div class="research-card rc-blue">
+    <div class="research-card glass-card glass-card-cyan">
       <div class="rc-icon">⚡</div>
-      <span class="rc-tag" style="background:rgba(0,245,255,0.15);color:var(--cyan);">Sustainable Development</span>
+      <span class="rc-tag rc-tag-cyan">Sustainable Development</span>
       <h3>Smart Grids</h3>
-      <p>Interested in applying AI and optimisation to smart grid development — making energy systems more efficient, adaptive, and sustainable. Because the grid that powers the future should also waste the least of it.</p>
+      <p>Applying AI and optimisation to smart grid development — making energy systems more efficient, adaptive, and sustainable. The grid that powers the future should waste the least of it.</p>
     </div>
-    <div class="research-card rc-pink">
+    <div class="research-card glass-card glass-card-pink">
       <div class="rc-icon">🔒</div>
-      <span class="rc-tag" style="background:rgba(255,60,172,0.15);color:var(--pink);">Secure by Design</span>
+      <span class="rc-tag rc-tag-pink">Secure by Design</span>
       <h3>Secure Sustainable Systems</h3>
-      <p>A smart grid without security is just a vulnerability with a solar panel. Building systems that are efficient AND resilient — because sustainability means nothing if critical infrastructure can be taken down in a CTF challenge. I would know.</p>
+      <p>A smart grid without security is just a vulnerability with a solar panel. Building systems that are efficient AND resilient. Sustainability means nothing if critical infrastructure can be taken down in a CTF. I would know.</p>
     </div>
   </div>
-  <div class="reveal" style="background:var(--card);border:1px solid rgba(255,255,255,0.06);border-left:5px solid var(--cyan);padding:1.8rem 2rem;border-radius:4px;max-width:700px;">
-    <p style="font-family:'Space Mono',monospace;font-size:13px;color:rgba(240,240,240,0.7);line-height:2;margin:0;">
+  <div class="reveal glass-card glass-card-cyan" style="padding:1.8rem 2rem;max-width:700px;border-left:5px solid var(--cyan);border-radius:8px;">
+    <p style="font-family:'Space Mono',monospace;font-size:13px;color:rgba(240,240,240,0.85);line-height:2;margin:0;">
       "I pick the hard problems on purpose.<br>
       <em style="color:var(--yellow);">Life's too short for boring datasets.</em>"
     </p>
   </div>
 </section>
 
-<!-- CYBER -->
-<section class="cyber sec-mid" id="cyber">
+<section class="sec-mid" id="cyber">
   <div class="reveal">
     <p class="section-label">// the dark side (the cool one)</p>
     <h2 class="section-title">I Also<br><span style="color:var(--pink);">Break</span><br>Things.</h2>
@@ -356,97 +385,37 @@
       </div>
       <p>Most people build systems and hope nobody pokes holes in them. I <strong>am</strong> the person poking holes.</p>
       <p>Web exploitation, CTFs, Active Directory workshops — I operate in the space where <strong>offence teaches defence</strong>. You can't protect what you don't understand how to attack.</p>
-      <p style="color:rgba(240,240,240,0.4);font-size:12px;font-family:'Space Mono',monospace;">bi0s is one of India's top CTF teams. Getting in requires skill. Staying in requires more skill. And coffee.</p>
-      <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,60,172,0.1);border:1px solid rgba(255,60,172,0.3);padding:10px 18px;border-radius:3px;margin-top:0.5rem;">
+      <p style="font-size:12px;font-family:'Space Mono',monospace;color:rgba(240,240,240,0.5);">bi0s is one of India's top CTF teams. Getting in requires skill. Staying in requires more. And coffee.</p>
+      <div class="ethical-badge">
         <span style="font-size:16px;">💀</span>
         <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.1em;color:var(--pink);">Ethical Hacker</span>
-        <span style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(240,240,240,0.4);">Professionally. With permission. Usually.</span>
+        <span style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(240,240,240,0.5);">Professionally. With permission. Usually.</span>
       </div>
     </div>
     <div>
-      <div class="cbadge">
-        <div class="cbadge-icon">🔴</div>
-        <div class="cbadge-text">
-          <span class="span-pink">bi0s · Red Teaming</span>
-          <h4>Trainee Member</h4>
-          <p>One of India's top CTF teams. Red Teaming track. Learning to think like the attacker so the defender always wins.</p>
-        </div>
-      </div>
-      <div class="cbadge">
-        <div class="cbadge-icon">💻</div>
-        <div class="cbadge-text">
-          <span class="span-cyan">ACM-SIGCyber · Amritapuri</span>
-          <h4>Web Exploitation</h4>
-          <p>Active member. Pentested the faculty's official logbook website — found the holes before anyone else did. That's not mischief, that's service.</p>
-        </div>
-      </div>
-      <div class="cbadge">
-        <div class="cbadge-icon">🚩</div>
-        <div class="cbadge-text">
-          <span class="span-pink">CTF Challenge Creator</span>
-          <h4>I Make the Puzzles</h4>
-          <p>Not just a CTF player — I design challenges too. Building the traps AND escaping them.</p>
-        </div>
-      </div>
-      <div class="cbadge">
-        <div class="cbadge-icon">🏆</div>
-        <div class="cbadge-text">
-          <span class="span-cyan">THREX Hackathon · SRM University</span>
-          <h4>Top 20 Finalist</h4>
-          <p>Out of everyone who showed up, I made the top 20. Competitive. Confident. Will do it again.</p>
-        </div>
-      </div>
+      <div class="cbadge"><div class="cbadge-icon">🔴</div><div class="cbadge-text"><span class="span-pink">bi0s · Red Teaming</span><h4>Trainee Member</h4><p>One of India's top CTF teams. Learning to think like the attacker so the defender always wins.</p></div></div>
+      <div class="cbadge"><div class="cbadge-icon">💻</div><div class="cbadge-text"><span class="span-cyan">ACM-SIGCyber · Amritapuri</span><h4>Web Exploitation</h4><p>Active member. Pentested the faculty's official logbook website — found the holes before anyone else did. That's not mischief, that's service.</p></div></div>
+      <div class="cbadge"><div class="cbadge-icon">🚩</div><div class="cbadge-text"><span class="span-pink">CTF Challenge Creator</span><h4>I Make the Puzzles</h4><p>Not just a CTF player — I design challenges too. Building the traps AND escaping them.</p></div></div>
+      <div class="cbadge"><div class="cbadge-icon">🏆</div><div class="cbadge-text"><span class="span-cyan">THREX Hackathon · SRM University</span><h4>Top 20 Finalist</h4><p>Out of everyone who showed up, I made the top 20. Competitive. Confident. Will do it again.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
 <section class="sec-dark" id="skills">
   <div class="reveal">
     <p class="section-label">// what I know</p>
     <h2 class="section-title">My<br>Arsenal</h2>
   </div>
   <div class="skills-grid reveal">
-    <div class="skill-card">
-      <div class="skill-icon">🐍</div>
-      <h3>Languages</h3>
-      <p>Python is my love language. MATLAB is my complicated relationship. Rust is my ambition I haven't fully acted on yet.</p>
-      <div class="skill-tags"><span class="stag">Python</span><span class="stag">Java</span><span class="stag">MATLAB</span><span class="stag">Rust</span><span class="stag">Ruby</span><span class="stag">TypeScript</span></div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🌐</div>
-      <h3>Web Dev</h3>
-      <p>Full-stack capable. I build things people actually want to use. Mindful Fridge has real-time notifications. I'm proud of this.</p>
-      <div class="skill-tags"><span class="stag">HTML</span><span class="stag">CSS</span><span class="stag">JavaScript</span><span class="stag">React</span><span class="stag">Tailwind</span></div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🗄️</div>
-      <h3>Databases</h3>
-      <p>I write SQL that works on the first try. Sometimes. I'm improving the other times significantly.</p>
-      <div class="skill-tags"><span class="stag">PostgreSQL</span><span class="stag">MySQL</span><span class="stag">Supabase</span><span class="stag">Excel</span></div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🤖</div>
-      <h3>AI & ML</h3>
-      <p>I train models. They occasionally train me back. Mutual relationship. Great results.</p>
-      <div class="skill-tags"><span class="stag">Scikit-learn</span><span class="stag">Pandas</span><span class="stag">NumPy</span><span class="stag">MARL</span></div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🛠️</div>
-      <h3>Dev Tools</h3>
-      <p>Git commit messages are my diary. Jupyter is where experiments live. VSCode is home.</p>
-      <div class="skill-tags"><span class="stag">Git</span><span class="stag">VS Code</span><span class="stag">Jupyter</span><span class="stag">Vite</span></div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🔐</div>
-      <h3>Cybersecurity</h3>
-      <p>bi0s Red Team trainee. ACM-SIGCyber Web Exploitation. I find holes before the bad guys do. It's a lifestyle.</p>
-      <div class="skill-tags"><span class="stag">Web Exploit</span><span class="stag">Red Team</span><span class="stag">CTFs</span><span class="stag">AD Services</span></div>
-    </div>
+    <div class="skill-card"><div class="skill-icon">🐍</div><h3>Languages</h3><p>Python is my love language. MATLAB is my complicated relationship. Rust is my ambition I haven't fully acted on yet.</p><div class="skill-tags"><span class="stag">Python</span><span class="stag">Java</span><span class="stag">MATLAB</span><span class="stag">Rust</span><span class="stag">Ruby</span><span class="stag">TypeScript</span></div></div>
+    <div class="skill-card"><div class="skill-icon">🌐</div><h3>Web Dev</h3><p>Full-stack capable. I build things people actually use. Mindful Fridge has real-time notifications. I'm proud of this.</p><div class="skill-tags"><span class="stag">HTML</span><span class="stag">CSS</span><span class="stag">JavaScript</span><span class="stag">React</span><span class="stag">Tailwind</span></div></div>
+    <div class="skill-card"><div class="skill-icon">🗄️</div><h3>Databases</h3><p>I write SQL that works on the first try. Sometimes. Improving the other times significantly.</p><div class="skill-tags"><span class="stag">PostgreSQL</span><span class="stag">MySQL</span><span class="stag">Supabase</span><span class="stag">Excel</span></div></div>
+    <div class="skill-card"><div class="skill-icon">🤖</div><h3>AI & ML</h3><p>I train models. They occasionally train me back. Mutual relationship. Great results.</p><div class="skill-tags"><span class="stag">Scikit-learn</span><span class="stag">Pandas</span><span class="stag">NumPy</span><span class="stag">MARL</span></div></div>
+    <div class="skill-card"><div class="skill-icon">🛠️</div><h3>Dev Tools</h3><p>Git commit messages are my diary. Jupyter is where experiments live. VSCode is home.</p><div class="skill-tags"><span class="stag">Git</span><span class="stag">VS Code</span><span class="stag">Jupyter</span><span class="stag">Vite</span></div></div>
+    <div class="skill-card"><div class="skill-icon">🔐</div><h3>Cybersecurity</h3><p>bi0s Red Team trainee. ACM-SIGCyber Web Exploitation. I find holes before the bad guys do. It's a lifestyle.</p><div class="skill-tags"><span class="stag">Web Exploit</span><span class="stag">Red Team</span><span class="stag">CTFs</span><span class="stag">AD Services</span></div></div>
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section class="sec-mid" id="projects">
   <div class="reveal">
     <p class="section-label">// things I actually built</p>
@@ -484,102 +453,33 @@
   </div>
 </section>
 
-<!-- EXPERIENCE + EDUCATION -->
 <section class="sec-dark" id="experience">
   <div class="reveal">
     <p class="section-label">// where I've been</p>
     <h2 class="section-title">Experience<br>& Education</h2>
   </div>
   <div class="timeline reveal">
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-date">Nov 2025 – Feb 2026</div>
-      <div class="tl-title">Data Analysis Intern</div>
-      <div class="tl-org">SmartED Innovations</div>
-      <div class="tl-desc">Data analysis, model training, SQL, preprocessing. Built Minor and Major projects. Got very good at spotting bad data before it became someone else's problem.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot" style="border-color:var(--pink);"></div>
-      <div class="tl-date">2024 – Present</div>
-      <div class="tl-title">B.Tech — AI & Data Science</div>
-      <div class="tl-org">Amrita Vishwa Vidyapeetam, Amritapuri</div>
-      <div class="tl-desc">CGPA: 9.02. Optimisation under Uncertainty and Multi-Agent Systems. Currently making machines smarter. They're starting to return the favour.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot" style="border-color:var(--cyan);"></div>
-      <div class="tl-date">2022 – 2024</div>
-      <div class="tl-title">Board of Intermediate Education</div>
-      <div class="tl-org">Sri Viswa Junior College, Visakhapatnam</div>
-      <div class="tl-desc">Scored 95%. The origin story begins here.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot" style="border-color:rgba(255,255,255,0.3);"></div>
-      <div class="tl-date">2012 – 2022</div>
-      <div class="tl-title">Secondary School</div>
-      <div class="tl-org">DAV Public School, Ukkunagaram, Visakhapatnam</div>
-      <div class="tl-desc">Scored 90%. "Wait, I can build that?" — first thought, never left.</div>
-    </div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Nov 2025 – Feb 2026</div><div class="tl-title">Data Analysis Intern</div><div class="tl-org">SmartED Innovations</div><div class="tl-desc">Data analysis, model training, SQL, preprocessing. Built Minor and Major projects. Got very good at spotting bad data before it became someone else's problem.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--pink);"></div><div class="tl-date">2024 – Present</div><div class="tl-title">B.Tech — AI & Data Science</div><div class="tl-org">Amrita Vishwa Vidyapeetam, Amritapuri</div><div class="tl-desc">CGPA: 9.02. Optimisation under Uncertainty and Multi-Agent Systems. Currently making machines smarter. They're starting to return the favour.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--cyan);"></div><div class="tl-date">2022 – 2024</div><div class="tl-title">Board of Intermediate Education</div><div class="tl-org">Sri Viswa Junior College, Visakhapatnam</div><div class="tl-desc">Scored 95%. The origin story begins here.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:rgba(255,255,255,0.3);"></div><div class="tl-date">2012 – 2022</div><div class="tl-title">Secondary School</div><div class="tl-org">DAV Public School, Ukkunagaram, Visakhapatnam</div><div class="tl-desc">Scored 90%. "Wait, I can build that?" — first thought, never left.</div></div>
   </div>
 </section>
 
-<!-- ACADEMIC PROJECTS -->
 <section class="sec-mid" id="academic">
   <div class="reveal">
     <p class="section-label">// semester by semester</p>
     <h2 class="section-title">Academic<br>Projects</h2>
   </div>
   <div class="timeline reveal">
-
-    <div class="tl-item">
-      <div class="tl-dot" style="border-color:var(--yellow);"></div>
-      <div class="tl-date">Semester 1</div>
-      <div class="tl-title">Automatic Dispenser</div>
-      <div class="tl-org" style="color:var(--cyan);">Hardware · Embedded Systems</div>
-      <div class="tl-desc">Built an automatic dispenser system. Semester 1. Already making machines do things automatically. The trajectory was clear from day one.</div>
-      <a href="YOUR_GITHUB_LINK_HERE" class="placeholder-link">→ github link coming soon</a>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-dot" style="border-color:var(--pink);"></div>
-      <div class="tl-date">Semester 2</div>
-      <div class="tl-title">E-Commerce Website</div>
-      <div class="tl-org" style="color:var(--cyan);">Java · GUI Frameworks</div>
-      <div class="tl-desc">Java GUI framework-based e-commerce website. Full shopping experience. In Java. Before I even touched React. Respect the origin story.</div>
-      <a href="YOUR_GITHUB_LINK_HERE" class="placeholder-link">→ github link coming soon</a>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-dot" style="border-color:var(--cyan);"></div>
-      <div class="tl-date">Semester 2</div>
-      <div class="tl-title">Topology Optimisation of Lightweight Composite Structures</div>
-      <div class="tl-org" style="color:var(--cyan);">Aerospace Applications · Structural Engineering</div>
-      <div class="tl-desc">Optimising composite structures for aerospace — lighter, stronger, more efficient. Sustainability meets engineering. If it flies and wastes less material, that's the goal.</div>
-      <a href="YOUR_GITHUB_LINK_HERE" class="placeholder-link">→ github link coming soon</a>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-dot" style="border-color:var(--yellow);"></div>
-      <div class="tl-date">Semester 2</div>
-      <div class="tl-title">ORing Circuit using OpAmp & MOSFET</div>
-      <div class="tl-org" style="color:var(--cyan);">Analog Electronics · Circuit Design</div>
-      <div class="tl-desc">Designed and built an ORing circuit using OpAmp and MOSFET. Yes, this is the same person who later wrote MARL algorithms. The hardware foundation is real.</div>
-      <a href="YOUR_GITHUB_LINK_HERE" class="placeholder-link">→ github link coming soon</a>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-dot" style="border-color:var(--cyan);"></div>
-      <div class="tl-date">Semester 3 · Research Paper</div>
-      <div class="tl-title" style="font-size:18px;line-height:1.3;">Adaptive Meta-Guided MARL for Energy-Constrained Swarm UAV Precision Agriculture</div>
-      <div class="tl-org" style="color:var(--cyan);">Python · MARL · Swarm Intelligence · Sustainability</div>
-      <div class="tl-desc">The big one. Multi-agent reinforcement learning for energy-aware drone swarms in agriculture. Optimisation under uncertainty. Teaching machines to farm sustainably at scale. Semester 3. No big deal.</div>
-      <div class="project-result" style="margin-top:8px;">⚡ Energy-constrained · Meta-guided · Precision agriculture · Climate resilience</div>
-      <a href="YOUR_PAPER_OR_GITHUB_LINK_HERE" class="placeholder-link">→ paper / github link coming soon</a>
-    </div>
-
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--yellow);"></div><div class="tl-date">Semester 1</div><div class="tl-title">Automatic Dispenser</div><div class="tl-org" style="color:var(--cyan);">Hardware · Embedded Systems</div><div class="tl-desc">Built an automatic dispenser system. Semester 1. Already making machines do things automatically. The trajectory was clear from day one.</div><a href="YOUR_GITHUB_LINK_HERE" class="placeholder-link">→ github link coming soon</a></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--pink);"></div><div class="tl-date">Semester 2</div><div class="tl-title">E-Commerce Website</div><div class="tl-org" style="color:var(--cyan);">Java · GUI Frameworks</div><div class="tl-desc">Java GUI framework-based e-commerce website. Full shopping experience. In Java. Before I even touched React. Respect the origin story.</div><a href="YOUR_GITHUB_LINK_HERE" class="placeholder-link">→ github link coming soon</a></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--cyan);"></div><div class="tl-date">Semester 2</div><div class="tl-title">Topology Optimisation of Lightweight Composite Structures</div><div class="tl-org" style="color:var(--cyan);">Aerospace Applications · Structural Engineering</div><div class="tl-desc">Optimising composite structures for aerospace — lighter, stronger, more efficient. Sustainability meets engineering. If it flies and wastes less material, that's the goal.</div><a href="YOUR_GITHUB_LINK_HERE" class="placeholder-link">→ github link coming soon</a></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--yellow);"></div><div class="tl-date">Semester 2</div><div class="tl-title">ORing Circuit using OpAmp & MOSFET</div><div class="tl-org" style="color:var(--cyan);">Analog Electronics · Circuit Design</div><div class="tl-desc">Designed and built an ORing circuit using OpAmp and MOSFET. Yes, this is the same person who later wrote MARL algorithms. The hardware foundation is real.</div><a href="YOUR_GITHUB_LINK_HERE" class="placeholder-link">→ github link coming soon</a></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--cyan);"></div><div class="tl-date">Semester 3 · Research Paper</div><div class="tl-title" style="font-size:18px;line-height:1.3;">Adaptive Meta-Guided MARL for Energy-Constrained Swarm UAV Precision Agriculture</div><div class="tl-org" style="color:var(--cyan);">Python · MARL · Swarm Intelligence · Sustainability</div><div class="tl-desc">The big one. Multi-agent reinforcement learning for energy-aware drone swarms in agriculture. Optimisation under uncertainty. Teaching machines to farm sustainably at scale. Semester 3. No big deal.</div><div class="project-result" style="margin-top:8px;">⚡ Energy-constrained · Meta-guided · Precision agriculture · Climate resilience</div><a href="YOUR_PAPER_OR_GITHUB_LINK_HERE" class="placeholder-link">→ paper / github link coming soon</a></div>
   </div>
 </section>
 
-<!-- CERTS & CLUBS -->
 <section class="sec-dark" id="extras">
   <div class="reveal">
     <p class="section-label">// beyond the code</p>
@@ -606,7 +506,6 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="sec-mid contact" id="contact">
   <div class="reveal">
     <p class="section-label">// let's connect</p>
@@ -622,7 +521,7 @@
       <a href="https://github.com/Tenisha5132" target="_blank" class="btn btn-outline">GitHub</a>
       <a href="YOUR_LINKEDIN_URL" target="_blank" class="btn btn-pink">LinkedIn</a>
     </div>
-    <p style="font-family:'Space Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-top:1.5rem;">📍 Visakhapatnam, Andhra Pradesh &nbsp;|&nbsp; +91 7036976987</p>
+    <p style="font-family:'Space Mono',monospace;font-size:11px;color:rgba(240,240,240,0.35);margin-top:1.5rem;">📍 Visakhapatnam, Andhra Pradesh &nbsp;|&nbsp; +91 7036976987</p>
   </div>
 </section>
 
@@ -638,17 +537,74 @@
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
   });
+
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progress.style.width = (window.scrollY / h * 100) + '%';
+  });
+
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.1});
   reveals.forEach(r => observer.observe(r));
+
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
-      document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+      document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
     });
   });
+
+  const canvas = document.getElementById('ai-bg');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const particles = Array.from({length:80}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: (Math.random() - 0.5) * 0.4,
+    r: Math.random() * 1.5 + 0.5
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,245,255,0.6)';
+      ctx.fill();
+    });
+    for(let i = 0; i < particles.length; i++) {
+      for(let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 130) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          const alpha = (1 - dist/130) * 0.25;
+          ctx.strokeStyle = `rgba(0,245,255,${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
 </script>
 </body>
 </html>
