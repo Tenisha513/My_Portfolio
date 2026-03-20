@@ -112,8 +112,10 @@ The Projects section features 5 real projects with gradient image banners, techn
 ```
 My_Portfolio/
 │
-├── index.html       ← Main portfolio file (HTML + CSS in one file)
-└── README.md        ← This file
+├── images
+      ├── tenisha.png
+├── index.html      - Main portfolio file (HTML + CSS in one file)
+└── README.md       - This file
 ```
 
 ---
