@@ -123,6 +123,43 @@
       display:flex;gap:1rem;flex-wrap:wrap;
       animation:slideup 0.8s 0.7s cubic-bezier(0.16,1,0.3,1) both;
     }
+    .hero-content{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items:center;
+      gap:3rem;
+      width:100%;
+    }
+
+    .hero-image{
+      display:flex;
+      justify-content:center;
+      align-items:center;  
+    }
+
+    .hero-image img{
+      width:100%;
+      max-width:320px;
+      border-radius:16px;
+      object-fit:cover;
+      border:1px solid rgba(255,255,255,0.1);
+      box-shadow:0 0 40px rgba(0,245,255,0.2), 0 0 80px rgba(255,60,172,0.15);
+      transition:transform 0.3s;
+    }
+
+    .hero-image img:hover{
+      transform:scale(1.03);
+    }
+
+    @media(max-width:768px){
+      .hero-content{
+      grid-template-columns:1fr;
+      text-align:center;
+    }
+    .hero{
+      align-items:center;
+      }
+    }
     .btn{
       font-family:'Space Mono',monospace;font-size:13px;font-weight:700;
       letter-spacing:0.08em;text-transform:uppercase;
@@ -371,18 +408,29 @@
   </ul>
 </nav>
 <section class="hero" id="home">
-  <span class="badge">⚡ AI Engineer · Ethical Hacker · CGPA 9.02 · Probably Training a Model OR Breaking One Right Now</span>
-  <h1>TENISHA<br><span class="pink">AKHILA</span><br><span class="cyan">BALLA.</span></h1>
-  <p class="hero-sub">
-    AI &amp; Data Science @ Amrita Vishwa Vidyapeetam.<br>
-    I teach drone swarms to think. I make fridges intelligent.<br>
-    I break systems so defenders can build them better.<br>
-    <em style="color:rgba(240,240,240,0.35);">Yes, all on the same resume. Yes, it's real.</em>
-  </p>
-  <div class="hero-cta">
-    <a href="#projects" class="btn btn-primary">See My Work ↓</a>
-    <a href="#contact" class="btn btn-outline">Let's Talk</a>
-    <a href="/cdn-cgi/l/email-protection#583a393434392c3d36312b3039393330313439183f35393134763b3735" class="btn btn-pink">Email Me</a>
+  <div class="hero-content">
+    <div>
+      <span class="badge">⚡ AI Engineer · Ethical Hacker · CGPA 9.02 · Probably Training a Model OR Breaking One Right Now</span>
+      <h1>
+        TENISHA<br>
+        <span class="pink">AKHILA</span><br>
+        <span class="cyan">BALLA.</span>
+      </h1>
+      <p class="hero-sub">
+        AI &amp; Data Science @ Amrita Vishwa Vidyapeetam.<br>
+        I teach drone swarms to think. I make fridges intelligent.<br>
+        I break systems so defenders can build them better.<br>
+        <em style="color:rgba(240,240,240,0.35);">Yes, all on the same resume. Yes, it's real.</em>
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">See My Work ↓</a>
+        <a href="#contact" class="btn btn-outline">Let's Talk</a>
+        <a href="/cdn-cgi/l/email-protection#583a393434392c3d36312b3039393330313439183f35393134763b3735" class="btn btn-pink">Email Me</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/tenisha.jpg" alt="Tenisha Profile"/>
+    </div>
   </div>
 </section>
 <div class="ticker">
