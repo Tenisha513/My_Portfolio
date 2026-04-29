@@ -1,6 +1,6 @@
 # Tenisha Akhila Balla — Personal Portfolio Website
 
-**Course:** 23CSE113 — User Interface Design | Amrita Vishwa Vidyapeetham  
+**Course:** 23AID215 — User Interface Design | Amrita Vishwa Vidyapeetham  
 **Live Site:** https://tenisha5132.github.io/My_Portfolio  
 **GitHub Repo:** https://github.com/Tenisha5132/My_Portfolio
 
@@ -77,7 +77,7 @@ The portfolio is a single-page application structured into the following section
 - `@media (max-width: 480px)` — Full-width buttons, single-column all grids
 
 ### Navigation (CSS-only hamburger)
-The mobile menu uses the **CSS checkbox trick** — no JavaScript required:
+The mobile menu uses the **CSS checkbox trick**
 ```css
 #nav-toggle:checked ~ .nav-links { display: flex; }
 ```
@@ -97,7 +97,7 @@ html { scroll-behavior: smooth; }
 
 ## Project Showcase
 
-The Projects section features 5 real projects with gradient image banners, technology tags, descriptions, results, and external links:
+The Projects section has features 5 real projects with gradient image banners, technology tags, descriptions, results, and external links:
 
 1. **G-DQN for UAV Swarms** — Multi-Agent RL for precision agriculture
 2. **COVID-19 Dashboard** — ML forecasting with Scikit-learn (Colab link)
@@ -114,6 +114,7 @@ My_Portfolio/
 │
 ├── images
       ├── tenisha.png
+      ├── favicon.svg.png
 ├── index.html      - Main portfolio file (HTML + CSS in one file)
 └── README.md       - This file
 ```
